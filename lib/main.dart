@@ -65,16 +65,28 @@ class MyHomePage extends StatelessWidget {
                         
                         )
                     ],),      
+
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
-                          String textoIngresado = _controller.text;
+                          String textoNombre = _controller.text;
+                          String textoDescripcion = _controller2.text;
                           Navigator.of(context).pop();
                           _controller.clear();
-                          print(textoIngresado);
+                          _controller2.clear();
+                          print(textoNombre);
+                          print(textoDescripcion);
+                          
                         },
                         child: const Text('Aceptar'),
                       ),
+                      TextButton(
+                        onPressed: (){
+                          Navigator.of(context).pop();
+
+                        },
+                        child: const Text("Cancelar"))
+                      
                     ],
                   );
                 },
