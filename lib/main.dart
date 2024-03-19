@@ -17,6 +17,8 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     
@@ -42,16 +44,27 @@ class MyHomePage extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text('Nombre de la tarea'),
-                    content: TextField(
-                      controller: _controller,
-                      decoration: InputDecoration(
-                        labelText: 'Ingrese el nombre de la tarea',
-                        border: OutlineInputBorder(),
-                      ),
-
-                    ),
-                    //Aqui tengo que construir lo de la descripcion 
+                    title: const Text('Nueva Tarea'),
+                    content:  Column(
+                      children: [
+                        const Text("NOMBRE"),
+                        TextField(
+                          controller: _controller,
+                          decoration: const InputDecoration(
+                            labelText:  'Nombre corto',
+                            border: OutlineInputBorder(),
+                          )
+                        ),
+                        const Text("DESCRIPCION"),
+                        TextField(
+                          controller: _controller2,
+                          decoration: const InputDecoration(
+                            labelText: "Pequeña descripcion",
+                            border: OutlineInputBorder()
+                          ),
+                        
+                        )
+                    ],),      
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
@@ -69,7 +82,6 @@ class MyHomePage extends StatelessWidget {
             },
             child: const Text('Agregar'),
           ),
-          //const Text("universidad de medellin")
         ],
       ),
     );
