@@ -5,7 +5,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,6 +13,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -24,27 +24,59 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _controller2 = TextEditingController();
   String username_ = '';
   String descrip = '';
-  
+  bool? ischeked_ = false;
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         title: const Text('Lista de tareas'),
       ),
       body: Column(
-        
         children: [
-           ListTile(
-            title:  Text(username_),
+          ListTile(
+            title: Text(username_),
             subtitle: Text(descrip),
             onTap: () {
-              print("HOLAMUNDO");
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text("Estado de la tarea"),
+                    content: Column(
+                      children: [
+                        CheckboxListTile(
+                            title: const Text("Tarea completada"),
+                            value: ischeked_,
+                            onChanged: (bool? newValue) {
+                              setState(() {
+                                ischeked_ = newValue;
+                              });
+                            }),
+                        TextButton(
+                          style:
+                              TextButton.styleFrom(backgroundColor: Colors.red),
+                          onPressed: () {},
+                          child: const Text(
+                            "Eliminar tarea",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Cerrar'),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
-            
-
           ),
           ElevatedButton(
             onPressed: () {
@@ -53,31 +85,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: const Text('Nueva Tarea'),
-                    content:  Column(
+                    content: Column(
                       children: [
                         const Text("NOMBRE"),
                         TextField(
-                          controller: _controller,
-                          decoration: const InputDecoration(
-                            labelText:  'Nombre corto',
-                            border: OutlineInputBorder(),
-              
-                          )
-                        ),
-
-
-
+                            controller: _controller,
+                            decoration: const InputDecoration(
+                              labelText: 'Nombre corto',
+                              border: OutlineInputBorder(),
+                            )),
                         const Text("DESCRIPCION"),
                         TextField(
                           controller: _controller2,
                           decoration: const InputDecoration(
-                            labelText: "Pequeña descripcion",
-                            border: OutlineInputBorder()
-                          ),
-                        
+                              labelText: "Pequeña descripcion",
+                              border: OutlineInputBorder()),
                         )
-                    ],),      
-
+                      ],
+                    ),
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
@@ -86,8 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           Navigator.of(context).pop();
                           _controller.clear();
                           _controller2.clear();
-
-
                           print(textoNombre);
                           print(textoDescripcion);
                           setState(() {
@@ -98,21 +121,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: const Text('Aceptar'),
                       ),
                       TextButton(
-                        onPressed: (){
-                          Navigator.of(context).pop();
-
-                        },
-                        child: const Text("Cancelar"))
-                      
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("Cancelar"))
                     ],
                   );
                 },
               );
             },
             child: const Text('Agregar'),
-          
           ),
-           
         ],
       ),
     );
