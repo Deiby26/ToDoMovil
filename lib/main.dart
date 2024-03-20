@@ -14,10 +14,17 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
 
-class MyHomePage extends StatelessWidget {
+class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
+  String username_ = '';
+  String descrip = '';
+  
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +35,11 @@ class MyHomePage extends StatelessWidget {
         title: const Text('Lista de tareas'),
       ),
       body: Column(
+        
         children: [
            ListTile(
-            title:  const Text("Lista de pendientes"),
-            subtitle: const Text("Universidad de Medellin"),
+            title:  Text(username_),
+            subtitle: Text(descrip),
             onTap: () {
               print("HOLAMUNDO");
             },
@@ -53,8 +61,12 @@ class MyHomePage extends StatelessWidget {
                           decoration: const InputDecoration(
                             labelText:  'Nombre corto',
                             border: OutlineInputBorder(),
+              
                           )
                         ),
+
+
+
                         const Text("DESCRIPCION"),
                         TextField(
                           controller: _controller2,
@@ -74,9 +86,14 @@ class MyHomePage extends StatelessWidget {
                           Navigator.of(context).pop();
                           _controller.clear();
                           _controller2.clear();
+
+
                           print(textoNombre);
                           print(textoDescripcion);
-                          
+                          setState(() {
+                            username_ = textoNombre;
+                            descrip = textoDescripcion;
+                          });
                         },
                         child: const Text('Aceptar'),
                       ),
@@ -93,7 +110,9 @@ class MyHomePage extends StatelessWidget {
               );
             },
             child: const Text('Agregar'),
+          
           ),
+           
         ],
       ),
     );
