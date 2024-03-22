@@ -37,12 +37,17 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Color? colores;
+
   void addtask() {
     setState(() {
       _widgetCount++;
       Key newKey = UniqueKey();
       contenedor.add(
         ListTile(
+          tileColor: colores,
+          leading: Icon(Icons.access_alarms_sharp),
+          trailing: Icon(Icons.arrow_forward),
           key: newKey,
           title: Text(username_),
           subtitle: Text(descrip),
@@ -95,8 +100,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pop();
-                        isChecked_ = false;
-                        ischeked2 = false;
                       },
                       child: const Text('Cerrar'),
                     ),
@@ -105,6 +108,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         setState(() {
                           if (isChecked_ == true && ischeked2 == true) {
                           } else if (isChecked_ == true) {
+                            print("TAREA COMPLETADA");
+
                             Navigator.of(context).pop();
                           } else if (ischeked2 == true) {
                             Navigator.of(context).pop();
@@ -117,6 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             );
+            isChecked_ = false;
+            ischeked2 = false;
           },
         ),
       );
@@ -204,9 +211,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       TextButton(
                         onPressed: () {
                           setState(() {
-
-
-                            
                             Navigator.of(context).pop();
                           });
                         },
