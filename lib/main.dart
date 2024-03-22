@@ -142,7 +142,10 @@ class _MyHomePageState extends State<MyHomePage> {
           Column(
             children: contenedor,
           ),
-          ElevatedButton(
+          
+          FloatingActionButton(
+            
+
             onPressed: () {
               showDialog(
                 context: context,
@@ -214,17 +217,22 @@ class _MyHomePageState extends State<MyHomePage> {
                             Navigator.of(context).pop();
                           });
                         },
-                        child: const Text("cancel"),
+                        child: const Text("Cancelar"),
                       ),
                     ],
                   );
                 },
               );
             },
-            child: const Text('Agregar'),
+            child: const Text('+', style: TextStyle(fontSize: 30),),
+            
+            
           ),
+          
+          
         ],
       ),
+
     );
   }
 }
